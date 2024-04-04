@@ -17,10 +17,10 @@ app.get('/stream', (req, res) => {
     setTimeout(() => {
         clearInterval(intervalId);
         res.end();
-    }, 10000);
+    }, 10000);k
 });
 
-const PORT = 3000;
+const PORT = 80;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
