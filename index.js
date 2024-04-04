@@ -1,19 +1,26 @@
-const http = require('http');
+const express = require('express');
+const app = express();
 
-http.createServer(function (req, res) {
-    res.writeHead(200, {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Transfer-Encoding': 'chunked',
-        'X-Content-Type-Options': 'nosniff'
-    });
-    res.write('Beginning\n');
-    let count = 10;
-    const io = setInterval(function () {
-        res.write('Doing ' + count.toString() + '\n');
-        count--;
-        if (count === 0) {
-            res.end('Finished\n');
-            clearInterval(io);
-        }
+app.get('/stream', (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    let count = 0;
+
+    // Send a "hello world" message every second
+    const intervalId = setInterval(() => {
+        res.write(`data: Hello, world! ${count++}\n\n`);
     }, 1000);
-}).listen(80);
+
+    // Close the connection after 10 seconds
+    setTimeout(() => {
+        clearInterval(intervalId);
+        res.end();
+    }, 10000);
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
