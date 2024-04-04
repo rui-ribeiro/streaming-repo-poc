@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/rui-ribeiro/streaming-repo-poc.git",
   "author": "rui.ribeiro <ruiribeiro360@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  }
 }
