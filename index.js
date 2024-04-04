@@ -17,7 +17,7 @@ app.get('/stream', (req, res) => {
     setTimeout(() => {
         clearInterval(intervalId);
         res.end();
-    }, 10000);k
+    }, 10000);
 });
 
 const PORT = 3000;
